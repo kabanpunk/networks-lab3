@@ -114,11 +114,11 @@ class Clouds:
 @dataclass_json
 @dataclass
 class Sys:
-    country: str
-    sunrise: int
-    sunset: int
-    type:  Union[int, None] = None
-    id:  Union[int, None] = None
+    sunrise: Union[int, None] = None
+    sunset: Union[int, None] = None
+    country: Union[str, None] = None
+    type: Union[int, None] = None
+    id: Union[int, None] = None
     message: Union[str, None] = None
 
 
@@ -140,3 +140,70 @@ class WeatherOut:
     cod: str
     rain: Union[dict, None] = None
     snow: Union[dict, None] = None
+
+
+@dataclass_json
+@dataclass
+class WeatherListElement:
+    dt: int
+    main: Main
+    weather: List[Weather]
+    visibility: int
+    wind: Wind
+    clouds: Clouds
+    sys: Sys
+    dt_txt: str
+    pop: float
+    rain: Union[dict, None] = None
+    snow: Union[dict, None] = None
+
+@dataclass_json
+@dataclass
+class WeatherCity:
+    id: Union[int, None] = None
+    name: Union[str, None] = None  
+    coord: Union[Coord, None] = None  
+    country: Union[str, None] = None  
+    population: Union[int, None] = None  
+    timezone: Union[int, None] = None  
+    sunrise: Union[int, None] = None  
+    sunset: Union[int, None] = None  
+
+
+@dataclass_json
+@dataclass
+class WeatherForecastQuery:
+    lat: float
+    lon: float
+    mode: Union[str, None] = None
+    units: Union[str, None] = None
+    lang: Union[str, None] = None
+    cnt: Union[int, None] = None
+
+@dataclass_json
+@dataclass
+class WeatherForecastOut:
+    cod: str
+    message: int
+    cnt: int
+    list: Union[List[WeatherListElement], None] = None
+    city: Union[WeatherCity, None] = None
+
+
+"""
+Data schemas for https://getnofilter.com/ API
+"""
+
+
+@dataclass_json
+@dataclass
+class Nearest:
+    status: str
+    data: dict
+
+
+@dataclass_json
+@dataclass
+class Photo:
+    id: str
+    url: str

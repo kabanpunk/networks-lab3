@@ -6,7 +6,7 @@ from dataclasses import dataclass, asdict
 import src.schemas
 import src.utils
 
-from config import conf
+from src.config import conf
 
 import json
 
