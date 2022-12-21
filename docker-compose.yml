@@ -5,10 +5,11 @@ services:
   backend: 
     build: ./services/backend
     ports:
-      - 5000:5000 
-    command: uvicorn src.app:app --reload --host 0.0.0.0 --port 5000 
-    depends_on:
-      - db
+      - 8000:8000 
+    environment: 
+      - GRAPHHOPPER_API_KEY=38da6050-2777-45ab-ad0c-ac7792c868f0
+      - OPENWEATHERMAP_API_KEY=d901498ee217e0dd0697b8b3d83e187a
+    command: uvicorn src.app:app --reload --host 0.0.0.0 --port 8000  
       
   frontend:
     build: ./services/frontend
@@ -17,7 +18,3 @@ services:
       - './app/node_modules'
     ports:
       - 8080:8080
-
-      
-volumes:
-  postgres_data:
